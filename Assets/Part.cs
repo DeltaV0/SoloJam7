@@ -19,8 +19,8 @@ public class Part : MonoBehaviour
 
 	void FixedUpdate(){
 		if(Input.GetMouseButton(0)){
-			rb.AddForce((transform.position - Camera.main.ScreenToWorldPoint (Input.mousePosition)) * -5f);
-			rb.MoveRotation(rb.rotation + rb.velocity.magnitude);
+			rb.AddForce((transform.position - Camera.main.ScreenToWorldPoint (Input.mousePosition)) * -10f);
+			rb.MoveRotation(rb.rotation + (rb.velocity.magnitude * 3f));
 		}
 	}
 
