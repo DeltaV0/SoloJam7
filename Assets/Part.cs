@@ -18,14 +18,15 @@ public class Part : MonoBehaviour
     }
 
 	void FixedUpdate(){
-		if(Input.GetMouseButton(0)){
-			rb.AddForce((transform.position - Camera.main.ScreenToWorldPoint (Input.mousePosition)) * -10f);
+		if(Vector3.Distance(transform.position, Player.player.PlayerPos.position) < 4){
+			rb.AddForce((transform.position - Player.player.PlayerPos.position) * -10f);
 			rb.MoveRotation(rb.rotation + (rb.velocity.magnitude * 3f));
 		}
 	}
 
 	void OnCollisionEnter2D(Collision2D collision){
-		if(collision.gameObject.name.Equals("Zone")){
+		if(collision.gameObject.name.Equals("Player")){
+			Player.thingies++;
 			Destroy(gameObject);
 		}
 	}
