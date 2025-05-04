@@ -6,7 +6,7 @@ using TMPro;
 public class Item : MonoBehaviour
 {
     public int ID;
-    public string name;
+    public string namea;
 
     public int cost;
 
@@ -40,7 +40,7 @@ public class Item : MonoBehaviour
             
         }
         else {
-            t1.text = name;
+            t1.text = namea;
             t2.text = "";
         }
     }

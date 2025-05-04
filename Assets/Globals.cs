@@ -14,7 +14,7 @@ public class Globals : MonoBehaviour
 
     public static bool gamig;
 
-    public GameObject[] Maps;
+    //public GameObject[] Maps;
 
     public GameObject current;
     //public Transform player;
@@ -25,7 +25,7 @@ public class Globals : MonoBehaviour
         wave = 0;
         enemies = 0;
         timer = 250;
-        current = (GameObject)Instantiate(Maps[Random.Range(0, Maps.Length)], transform.position, transform.rotation);
+        //current = (GameObject)Instantiate(Maps[Random.Range(0, Maps.Length)], transform.position, transform.rotation);
         //current = bullet;
     }
 
@@ -42,12 +42,12 @@ public class Globals : MonoBehaviour
         }
 
         if (!gamig && Input.GetKeyDown(KeyCode.F)) {
-            Destroy(current);
-            current = null;
+            //Destroy(current);
+            //current = null;
             gamig = true;
             Shop.shop.DeactivateShop();
             Player.player.PlayerPos.position = new Vector3(0, 0, 0);
-            current = (GameObject)Instantiate(Maps[Random.Range(0, Maps.Length)], transform.position, transform.rotation);
+            //current = (GameObject)Instantiate(Maps[Random.Range(0, Maps.Length)], transform.position, transform.rotation);
             //current = bullet;
             wave++;
             for (int i = 0; i < wave; i++)

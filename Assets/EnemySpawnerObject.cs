@@ -8,7 +8,7 @@ public class EnemySpawnerObject : MonoBehaviour
 
     public int timermax;
 
-    public GameObject enemyPf;
+    public GameObject[] enemyPf;
 
     public Transform progress;
 
@@ -25,7 +25,7 @@ public class EnemySpawnerObject : MonoBehaviour
     void Update()
     {
         if (timer <= 0) {
-            GameObject bullet = (GameObject)Instantiate(enemyPf, transform.position, transform.rotation);
+            GameObject bullet = (GameObject)Instantiate(enemyPf[Random.Range(0, 2)], transform.position, transform.rotation);
             Destroy(gameObject);
         }
     }

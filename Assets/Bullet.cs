@@ -27,8 +27,9 @@ public class Bullet : MonoBehaviour
         }
         else if (player)
         {
-            if (collision.gameObject.name.Equals("Enemy(Clone)"))
+            if (collision.gameObject.name.Equals("Enemy(Clone)") || collision.gameObject.name.Equals("SuicEnemy(Clone)"))
             {
+                collision.gameObject.GetComponent<Rigidbody2D>().velocity += gameObject.GetComponent<Rigidbody2D>().velocity;
                 collision.gameObject.GetComponent<Enemy>().health--;
                 Destroy(gameObject);
             }
@@ -36,6 +37,7 @@ public class Bullet : MonoBehaviour
         else {
             if (collision.gameObject.name.Equals("Player"))
             {
+                collision.gameObject.GetComponent<Rigidbody2D>().velocity += gameObject.GetComponent<Rigidbody2D>().velocity;
                 collision.gameObject.GetComponent<Player>().health--;
                 Destroy(gameObject);
             }
