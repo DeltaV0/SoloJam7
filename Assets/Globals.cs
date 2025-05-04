@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class Globals : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class Globals : MonoBehaviour
 
     public static bool gamig;
 
+    public PostProcessVolume Volume;
+
+    //public VhsFX vsh;
     //public GameObject[] Maps;
 
     public GameObject current;
@@ -32,6 +36,8 @@ public class Globals : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       // Volume.weight = 1 - (timer / 250.0f);
+        //vsh.
         if (timer <= 0 && gamig) {
             /*timer = 250;
             */
@@ -47,6 +53,7 @@ public class Globals : MonoBehaviour
             gamig = true;
             Shop.shop.DeactivateShop();
             Player.player.PlayerPos.position = new Vector3(0, 0, 0);
+            Player.player.health = Player.player.maxHealth; //heal player to full for now
             //current = (GameObject)Instantiate(Maps[Random.Range(0, Maps.Length)], transform.position, transform.rotation);
             //current = bullet;
             wave++;

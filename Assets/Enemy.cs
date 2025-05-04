@@ -29,6 +29,15 @@ public class Enemy : MonoBehaviour
     public bool spinny;
 
     public bool staticmover;
+
+    public float rotMult;
+
+    public bool burning;
+
+    public int burningtime;
+
+    public int damage;
+    //public bool sideStep;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,7 +49,15 @@ public class Enemy : MonoBehaviour
         }
         //health = 5;
         ShootMax = Random.Range(150, 300);
+        if (type == 0)
+        {
+            ShootMax = Random.Range(150, 300);
+        }
+        else if (type == 2) {
+            ShootMax = Random.Range(25, 50);
+        }
         shoottime = 50;
+        burningtime = 1;
         //Globals.enemies++;
     }
 
@@ -53,7 +70,11 @@ public class Enemy : MonoBehaviour
         transform.LookAt(Player.player.transform.position, Vector3.up);
         transform.Rotate(0, 90, 90);
          }
-        if(type == 0) {
+        if (burningtime == 0) {
+            burningtime = Player.player.burningSpeed;
+            health -= 1;
+        }
+        if(type == 0 || type == 2) {
         if (shoottime <= 0) {
             shoottime = ShootMax;
             GameObject bullet = (GameObject)Instantiate(bulletPrefab, transform.position, transform.rotation);
@@ -67,12 +88,14 @@ public class Enemy : MonoBehaviour
 
             bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(Mathf.Cos((bullet.GetComponent<Rigidbody2D>().rotation + 90f) * Mathf.Deg2Rad) * fireForce, Mathf.Sin((bullet.GetComponent<Rigidbody2D>().rotation + 90f) * Mathf.Deg2Rad) * fireForce), ForceMode2D.Impulse);
             bullet.GetComponent<Bullet>().player = false;
+            bullet.GetComponent<Bullet>().damage = damage;
             bullet.GetComponent<Bullet>().enemytype = gameObject;
         }
         } else if(type == 1){
             if(Vector3.Distance(transform.position, Player.player.PlayerPos.position) < 1){
-            Player.player.health--;
+            Player.player.health -= damage;
             Globals.enemies--;
+            Player.player.animator.SetTrigger("Hit");
             Destroy(gameObject);
         }
         }
@@ -82,7 +105,7 @@ public class Enemy : MonoBehaviour
         {
            // GameObject boom = (GameObject)Instantiate(DeathPf, transform.position/*a.transform.position*/, transform.rotation);
             //Global.enemys--;
-            if(Random.Range(0, 2) == 0) {
+            if(/*Random.Range(0, 1) == 0*/true) {
                 GameObject boom = (GameObject)Instantiate(packet, transform.position, transform.rotation);
             }
             Globals.enemies--;
@@ -94,7 +117,7 @@ public class Enemy : MonoBehaviour
     {
         if (spinny) {
        // rb.AddForce((transform.position - Player.player.PlayerPos.position) * -10f);
-        rb.MoveRotation(rb.rotation + (rb.velocity.magnitude * 3f) + 1f);
+        rb.MoveRotation(rb.rotation + (rb.velocity.magnitude * rotMult) + 1f);
         }
         if (!staticmover) {
             rb.AddForce((transform.position - Player.player.PlayerPos.position) * (-1 * moveSpeed));
@@ -103,6 +126,9 @@ public class Enemy : MonoBehaviour
         {
             shoottime--;
         }
-
+        if(burning && burningtime > 0)
+        {
+            burningtime--;
+        }
     }
 }

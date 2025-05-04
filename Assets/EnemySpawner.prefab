@@ -417,5 +417,6 @@ MonoBehaviour:
   enemyPf:
   - {fileID: 285215352929821934, guid: 8f15e8b54950df34e8ede50c46f610b3, type: 3}
   - {fileID: 7764322989103708426, guid: e2fd3386a0935e34586d0fd7a144bb22, type: 3}
+  - {fileID: 2180249499716671731, guid: a3dd962f3fa2df6428abe78584b30f7d, type: 3}
   progress: {fileID: 2759495924046048918}
   Spinner: {fileID: 8189746963138534089}

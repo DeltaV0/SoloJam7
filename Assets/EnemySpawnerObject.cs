@@ -16,7 +16,7 @@ public class EnemySpawnerObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        timermax = Random.Range(50, 150);
+        timermax = Random.Range(50, 250);
         timer = timermax;
         Globals.enemies++;
     }
@@ -25,7 +25,7 @@ public class EnemySpawnerObject : MonoBehaviour
     void Update()
     {
         if (timer <= 0) {
-            GameObject bullet = (GameObject)Instantiate(enemyPf[Random.Range(0, 2)], transform.position, transform.rotation);
+            GameObject bullet = (GameObject)Instantiate(enemyPf[Random.Range(0, enemyPf.Length)], transform.position, transform.rotation);
             Destroy(gameObject);
         }
     }
@@ -34,8 +34,9 @@ public class EnemySpawnerObject : MonoBehaviour
     {
         
         if (timer > 0) {
-            Spinner.MoveRotation(Spinner.rotation + 10);
-            //progress.localScale = new Vector3((1 - (timer / timermax)) * 0.6f, (1 - (timer / timermax)) * 0.6f, (1 - (timer / timermax)) * 0.6f);
+            Spinner.rotation = Mathf.Pow(((float)((float)timer / timermax)) * 5, 2)  * 45;
+            //Spinner.MoveRotation(Spinner.rotation + 10);
+            progress.localScale = new Vector3((1 - (float)((float)timer / timermax)) * 0.6f, (1 - (float)((float)timer / timermax)) * 0.6f, (1 - (float)((float)timer / timermax)) * 0.6f);
             timer--;
         }
     }

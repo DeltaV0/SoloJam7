@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: -1059682865228184484}
   m_Layer: 1
   m_Name: SuicEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 9047832092464971479}
-  health: 2
+  health: 10
   rb: {fileID: -1059682865228184484}
   packet: {fileID: 65566486423329544, guid: 56b519aac8ed6e2498e015cf3ab77085, type: 3}
   ShootMax: 0
@@ -219,6 +219,10 @@ MonoBehaviour:
   type: 1
   spinny: 1
   staticmover: 0
+  rotMult: 2
+  burning: 0
+  burningtime: 0
+  damage: 25
 --- !u!60 &6945423814361642676
 PolygonCollider2D:
   m_ObjectHideFlags: 0
