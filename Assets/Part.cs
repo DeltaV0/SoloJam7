@@ -26,6 +26,7 @@ public class Part : MonoBehaviour
 
 	void OnCollisionEnter2D(Collision2D collision){
 		if(collision.gameObject.name.Equals("Player")){
+			Player.player.aud[1].Play();
 			Player.thingies++;
 			Destroy(gameObject);
 		}

@@ -20,14 +20,14 @@ public class Item : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-        cost = 1;
+        cost = (int)rarity;
         for(int i = 0; i < Player.player.purchases.Count; i++)
         {
             if (Player.player.purchases[i] == ID) {
                 cost++;
             }
         }
-        cost = (int) (cost * rarity);
+        //cost = (int) (cost * rarity);
         cost = (int)(cost * (Globals.wave * 0.25) + 1);
     }
 
@@ -83,9 +83,17 @@ public class Item : MonoBehaviour
             Player.player.burningBullets = true;
             Player.player.burningSpeed = (int)(Player.player.burningSpeed * 0.8f);
             //Player.player.burningSpeed *= 0.8f;
-        }
+		} else if (ID == 8) {
+			//Player.player.fireForce *= 1.25f;
+			//Player.player.burningBullets = true;
+			Player.player.repellingForce += 2f;
+			//Player.player.burningSpeed *= 0.8f;
+		}
 
+		Static.thingsbought++;
         Player.player.purchases.Add(ID);
+
+		GameObject bullet1 = (GameObject)Instantiate(Globals.me.purchaseParts, transform.position, transform.rotation);
         //get the upgrade from ID and do it
         //also make fancy particles
         //then destroy go

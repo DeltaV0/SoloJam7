@@ -11,6 +11,8 @@ public class Bullet : MonoBehaviour
     public int damage;
 
     public bool flaming;
+
+	public Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +22,9 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+		if(Vector3.Distance(transform.position, Player.player.PlayerPos.position) < 4){
+		rb.AddForce((transform.position - Player.player.PlayerPos.position) * (Player.player.repellingForce * 0.1f));
+		}
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -35,8 +39,10 @@ public class Bullet : MonoBehaviour
             {
                 collision.gameObject.GetComponent<Rigidbody2D>().velocity += gameObject.GetComponent<Rigidbody2D>().velocity * 0.1f;
                 collision.gameObject.GetComponent<Enemy>().health -= damage;
+				collision.gameObject.GetComponent<Enemy>().hurt.Play();
                 if (flaming) {
                     collision.gameObject.GetComponent<Enemy>().burning = true;
+					collision.gameObject.GetComponent<Enemy>().Burning.Play();
                 }
                 Destroy(gameObject);
             }
@@ -44,6 +50,7 @@ public class Bullet : MonoBehaviour
         else {
             if (collision.gameObject.name.Equals("Player"))
             {
+				Player.player.aud[2].Play();
                 collision.gameObject.GetComponent<Rigidbody2D>().velocity += gameObject.GetComponent<Rigidbody2D>().velocity * 0.1f;
                 collision.gameObject.GetComponent<Player>().health -= damage;
                 collision.gameObject.GetComponent<Player>().animator.SetTrigger("Hit");

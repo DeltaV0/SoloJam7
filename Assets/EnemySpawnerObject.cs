@@ -13,6 +13,8 @@ public class EnemySpawnerObject : MonoBehaviour
     public Transform progress;
 
     public Rigidbody2D Spinner;
+
+	public GameObject spawn;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +28,7 @@ public class EnemySpawnerObject : MonoBehaviour
     {
         if (timer <= 0) {
             GameObject bullet = (GameObject)Instantiate(enemyPf[Random.Range(0, enemyPf.Length)], transform.position, transform.rotation);
+			GameObject bullet1 = (GameObject)Instantiate(spawn, transform.position, transform.rotation);
             Destroy(gameObject);
         }
     }

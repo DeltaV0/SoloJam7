@@ -101,6 +101,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: 0
   enemytype: {fileID: 0}
+  damage: 0
+  flaming: 0
+  rb: {fileID: 8936900412709605655}
 --- !u!50 &8936900412709605655
 Rigidbody2D:
   serializedVersion: 4

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -42,14 +43,20 @@ public class Player : MonoBehaviour
 
     public int burningSpeed;
 
+	public float repellingForce;
+
     public List<int> purchases = new List<int>();
+
+	public AudioSource[] aud;
     // Start is called before the first frame update
     void Start()
     {
+		thingies = 0;
+		burningSpeed = 25;
         shots = 1;
         maxTimer = 50;
         timer = maxTimer;
-        maxHealth = 100;
+        maxHealth = 50;
         health = maxHealth;
         player = this;
         damage = 5;
@@ -59,7 +66,8 @@ public class Player : MonoBehaviour
     void Update()
     {
         if (health <= 0) { 
-            //die
+			Static.wave = Globals.wave;
+			SceneManager.LoadSceneAsync("Dead");
         }
         HealthCircle.fillAmount = (float)((float)health / maxHealth);
         float moveX = Input.GetAxisRaw ("Horizontal");
@@ -87,6 +95,8 @@ public class Player : MonoBehaviour
             bullet.GetComponent<Bullet>().damage = damage;
             bullet.GetComponent<Bullet>().flaming = burningBullets;
             bullet.GetComponent<Bullet>().enemytype = gameObject;
+			aud[0].pitch = Random.Range(1.9f, 2.1f);
+			aud[0].Play();
             }
 
            
